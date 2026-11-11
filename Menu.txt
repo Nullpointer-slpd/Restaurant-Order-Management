@@ -1,0 +1,9 @@
+ItemID|Name|Price(₹)|Category
+001|Avocado Shushi|380|Veg
+002|Aloo Paratha|130|Veg
+003|Cheesy French Fries|120|Veg
+004|Chicken Shawarma|150|Non-Veg
+005|Veg Shawarma|120|Veg
+006|Chicken Schezwan Noodles|140|Non-Veg
+007|Chocolate Ice cream|100|Dessert
+008|Diet Coke|40|Beverage

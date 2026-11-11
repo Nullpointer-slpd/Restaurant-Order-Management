@@ -1,0 +1,51 @@
+BillNo|Date|Time|ItemID|Name|Price(₹)|Category
+001|06-11-2026|22-37|004|Chicken Shawarma|150|Non-Veg
+001|06-11-2026|22-37|006|Chicken Schezwan Noodles|140|Non-Veg
+001|06-11-2026|22-37|008|Diet Coke|40|Beverage
+002|06-11-2026|22-52|004|Chicken Shawarma|150|Non-Veg
+002|06-11-2026|22-52|006|Chicken Schezwan Noodles|140|Non-Veg
+003|06-11-2026|22-53|001|Avocado Shushi|380|Veg
+003|06-11-2026|22-53|002|Aloo Paratha|130|Veg
+003|06-11-2026|22-53|005|Veg Shawarma|120|Veg
+004|06-11-2026|22-53|005|Veg Shawarma|120|Veg
+004|06-11-2026|22-53|008|Diet Coke|40|Beverage
+005|06-11-2026|22-58|003|Cheesy French Fries|120|Veg
+005|06-11-2026|22-58|008|Diet Coke|40|Beverage
+006|06-11-2026|22-58|004|Chicken Shawarma|150|Non-Veg
+006|06-11-2026|22-58|006|Chicken Schezwan Noodles|140|Non-Veg
+007|06-11-2026|23-21|005|Veg Shawarma|120|Veg
+007|06-11-2026|23-21|006|Chicken Schezwan Noodles|140|Non-Veg
+007|06-11-2026|23-21|007|Chocolate Ice cream|100|Dessert
+007|06-11-2026|23-21|008|Diet Coke|40|Beverage
+008|06-11-2026|23-21|004|Chicken Shawarma|150|Non-Veg
+008|06-11-2026|23-21|005|Veg Shawarma|120|Veg
+008|06-11-2026|23-21|006|Chicken Schezwan Noodles|140|Non-Veg
+008|06-11-2026|23-21|008|Diet Coke|40|Beverage
+009|06-11-2026|23-25|003|Cheesy French Fries|120|Veg
+009|06-11-2026|23-25|007|Chocolate Ice cream|100|Dessert
+009|06-11-2026|23-25|008|Diet Coke|40|Beverage
+010|07-11-2026|10-24|004|Chicken Shawarma|150|Non-Veg
+010|07-11-2026|10-24|008|Diet Coke|40|Beverage
+011|07-11-2026|10-24|002|Aloo Paratha|130|Veg
+011|07-11-2026|10-24|001|Avocado Shushi|380|Veg
+011|07-11-2026|10-24|007|Chocolate Ice cream|100|Dessert
+012|07-11-2026|10-25|001|Avocado Shushi|380|Veg
+012|07-11-2026|10-25|002|Aloo Paratha|130|Veg
+012|07-11-2026|10-25|008|Diet Coke|40|Beverage
+013|07-11-2026|10-29|004|Chicken Shawarma|150|Non-Veg
+013|07-11-2026|10-29|006|Chicken Schezwan Noodles|140|Non-Veg
+014|07-11-2026|10-30|005|Veg Shawarma|120|Veg
+014|07-11-2026|10-30|003|Cheesy French Fries|120|Veg
+014|07-11-2026|10-30|004|Chicken Shawarma|150|Non-Veg
+014|07-11-2026|10-30|006|Chicken Schezwan Noodles|140|Non-Veg
+015|07-11-2026|10-31|007|Chocolate Ice cream|100|Dessert
+015|07-11-2026|10-31|001|Avocado Shushi|380|Veg
+015|07-11-2026|10-31|008|Diet Coke|40|Beverage
+016|07-11-2026|10-32|002|Aloo Paratha|130|Veg
+016|07-11-2026|10-32|004|Chicken Shawarma|150|Non-Veg
+017|07-11-2026|12-36|008|Diet Coke|40|Beverage
+017|07-11-2026|12-36|004|Chicken Shawarma|150|Non-Veg
+018|07-11-2026|13-20|004|Chicken Shawarma|150|Non-Veg
+018|07-11-2026|13-20|007|Chocolate Ice cream|100|Dessert
+018|07-11-2026|13-20|006|Chicken Schezwan Noodles|140|Non-Veg
+018|07-11-2026|13-20|008|Diet Coke|40|Beverage
