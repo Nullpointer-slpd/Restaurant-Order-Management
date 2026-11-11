@@ -7,18 +7,26 @@ hourly_analysis_for_the_given_date_and_hour() {
     local date=$2
     #+substr($3,1,2)==+hour : + added to convert the variables into their respective numerical equivalent
     awk -F '|' -v hour="$hour" -v date="$date" '$2==date && +substr($3,1,2)==+hour' "$ORDER_FILE" | awk -F '|'\
-        '{sum+=$6;order_count[$1]++} 
-        END {
-        for(o in order_count)count++;
+        '{amount[$1]+=$6} END {
+            sum = 0;
+            count = 0;
+            for ( a in amount){
+                count++;
+                if (amount[a]>50)
+                    amount[a]-= (0.1)*amount[a];
+                sum+=amount[a];
+            }
         if (count!=0){
             print "Total Hourly sale : ₹" sum,"No. of orders :",count
             print "\nAverage Spending : ₹" (sum/count)
         }else{
-            print "Total Hourly sale : ₹0","No. of orders :0"}
+            print "Total Hourly sale : ₹0","No. of orders :0"
+            }
         }'
 }
 sales_by_category() {
-    awk -F '|' ' NR>1 {category[$7]+=$6} END {for (c in category) 
+    awk -F '|' ' NR>1 {category[$7]+=$6} END
+                 {for (c in category)
             print "Category : ",c " ; Sale : ₹" category[c]}' "$ORDER_FILE"
 }
 read -p "Enter the date for which you want the analysis for(DD-MM-YYYY format) : " input_date
@@ -42,8 +50,6 @@ read -p "Enter 'h' for hour and 'i' for interval. Enter 's' to skip : " input
             if [[ -z $current_sum || ! "$current_sum" =~ ^[0-9]+(\.[0-9]+)?$ ]];then #to assign zero to current_sum if its an invalid number
                 current_sum=0
             fi
-            is_greater=$(echo "$current_sum > $max_sum" | bc | tr -d '[:space:]')
-            echo "DEBUG: current_sum = '$current_sum' | max_sum = '$max_sum' |is_greater = '$is_greater' "
             if awk "BEGIN {exit !($current_sum > $max_sum)}";then
                 max_sum="$current_sum"
                 peak_hour="$i"
@@ -60,7 +66,7 @@ read -p "Enter 'h' for hour and 'i' for interval. Enter 's' to skip : " input
     else 
         echo "Invalid input" >&2
     fi
-read -p "Do you want to check category-wise sales(Overall)? [y/n] : " category_sales
+read -p "Do you want to check category-wise sales(Overall,without accounting for discount)? [y/n] : " category_sales
 if [[ "$category_sales" == 'y' ]];then
     sales_by_category
 elif [[ "$category_sales" == 'n' ]];then

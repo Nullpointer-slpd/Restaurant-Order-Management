@@ -1,10 +1,24 @@
 #!/bin/bash
 MENU_FILE="./Menu.txt"
 ORDER_FILE="./Order.txt"
+check_if_Menu_exists() {
+    if [ -f "$MENU_FILE" ];then
+        :
+    else
+        echo "Menu file doesn't exist in this directory. Please retry"
+        return 1;
+    fi
+}
 is_valid_order() {
     local input=$1
     if [[ "$input" =~ ^[0-9]{3}$ ]]; then
-        return 0
+        if awk -F '|' -v id="$o" '$1==id {found=1; exit} END {exit !found}' "$MENU_FILE"; then
+        # if found = 0, exit 1 indicates failure (i.e, not found). if found = 1, exit 0 indicates success
+            return 0;
+        else
+            echo "Invalid ItemID entered"
+        fi
+            return 1
     else
         echo "TypeError : Invalid order" >&2
         return 1
@@ -51,19 +65,27 @@ store_orders() {
     done
 }
 # To display the menu
+check_if_Menu_exists
 awk 1 "$MENU_FILE" | column -t -s '|'
 echo
 echo 
 declare -a orders
 while true; do
-    IFS=', ' read -r -a orders -p "Enter Item ID for the item you want to order. Separate either by commas or spaces, NOT BOTH : "
-    for o in "${orders[@]}";do 
-        if is_valid_order "$o"; then 
-            continue;
-        else
-            echo "Please try again"
-            exit 1
-        fi
+    while true; do 
+        IFS=', ' read -r -a orders -p "Enter Item ID for the item you want to order. Separate either by commas or spaces, NOT BOTH : "
+        all_not_valid=0;
+        for o in "${orders[@]}";do 
+            if is_valid_order "$o"; then 
+                continue;
+            else
+                echo "Please enter your order again"
+                all_not_valid=1
+                break;
+            fi
+        done
+        if [[ "$all_not_valid" -eq 0 ]];then
+            break;
+        fi;
     done
     read -p "Confirm order?[y/n] : " input
     if [[ $input == 'y' ]];then
