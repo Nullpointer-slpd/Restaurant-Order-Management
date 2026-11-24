@@ -3,10 +3,13 @@ MENU_FILE="./Menu.txt"
 ORDER_FILE="./Order.txt"
 is_valid_order() {
     local input=$1
-    if [[ "$input" =~ ^[0-9]{3}$ ]]; then
+
+    if [[ "$input" =~ ^[0-9]{3}$ ]] &&
+       awk -F '|' -v id="$input" '$1==id {found=1}
+       END {exit !found}' "$MENU_FILE"; then
         return 0
     else
-        echo "TypeError : Invalid order" >&2
+        echo "Invalid Item ID: $input" >&2
         return 1
     fi
 }
@@ -55,19 +58,46 @@ awk 1 "$MENU_FILE" | column -t -s '|'
 echo
 echo 
 declare -a orders
+declare -a items
+
 while true; do
-    IFS=', ' read -r -a orders -p "Enter Item ID for the item you want to order. Separate either by commas or spaces, NOT BOTH : "
-    for o in "${orders[@]}";do 
-        if is_valid_order "$o"; then 
-            continue;
+    orders=()
+
+    echo "Enter Item IDs with quantity if needed."
+    echo "Example: 008x2 004 007x3"
+
+    IFS=', ' read -r -a items -p "Enter your order: "
+
+    for o in "${items[@]}"; do
+
+        if [[ "$o" =~ ^[0-9]{3}x[1-9][0-9]?$ ]]; then
+            id=${o%x*}
+            qty=${o#*x}
+
+        elif [[ "$o" =~ ^[0-9]{3}$ ]]; then
+            id=$o
+            qty=1
+
+        else
+            echo "Invalid order: $o"
+            exit 1
+        fi
+
+        if is_valid_order "$id"; then
+            for ((i=0; i<qty; i++)); do
+                orders+=("$id")
+            done
         else
             echo "Please try again"
             exit 1
         fi
+
     done
+
     read -p "Confirm order?[y/n] : " input
-    if [[ $input == 'y' ]];then
-        break;
+
+    if [[ $input == 'y' ]]; then
+        break
     fi
 done
 if [ "${#orders[@]}" -eq 0 ];then #no of valid orders = 0
