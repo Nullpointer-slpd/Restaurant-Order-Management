@@ -10,7 +10,8 @@
 - Validates the item ID input of the food items selected. 
 - Confirms the orders before processing them. 
 - Generates a unique bill number for each order.
-- Stores the order details for future reference for the restaurant.
+- Automatic generation of itemized receipts with unique bill numbers.
+- Receipts include the date, time, ordered items, subtotal, discount and final payable amount.
 
 ### The Billing System
 
@@ -51,7 +52,10 @@ Restaurant-Order-Management/
 ├── Manager.sh
 ├── Menu.txt
 ├── Order.txt
+├── Receipt.sh
+├── Receipts/
 └── README.md
+
 ```
 
 
@@ -94,6 +98,10 @@ Restaurant-Order-Management/
 5. An eligible discount is applied based on the total bill and if the customer is eligible for it.
 
 6. The order details are saved in Order.txt.
+   
+7. An itemized receipt is generated containing the bill number, date, time, ordered items, subtotal, discount and final payable amount.
+
+8. The receipt is displayed to the customer and saved in the Receipts/ directory.
 
 ## How to Run
 
@@ -109,9 +117,12 @@ bash Server.sh
 
 # 4. Run the sales analysis system
 bash Manager.sh
+
+# 5. Retrieve a previously generated receipt
+bash Receipt.sh
 ```
 
-Order details are stored in `Order.txt`, while menu information is maintained in `Menu.txt`.
+Order details are stored in `Order.txt`, while menu information is maintained in `Menu.txt`. Generated receipts are stored as individual text files in the `Receipts/` directory using their respective bill numbers.
 
 ### Sales Analysis
 
