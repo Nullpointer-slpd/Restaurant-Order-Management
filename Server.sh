@@ -17,7 +17,7 @@ calculate_cost() {
     sum=0
     for o in "${orders[@]}";do 
         local price
-        price=$(grep -w "$o" $MENU_FILE | awk -F '|' '{print $3}')
+        price=$(awk -F '|' -v id="$o" '$1==id {print $3}' "$MENU_FILE")
         if [[ -n "$price" ]]; then #-n : non-zero length string , -z : zero length string
             sum=$(awk "BEGIN {print $price + $sum}")
         fi
@@ -25,6 +25,7 @@ calculate_cost() {
     echo "Total cost : $sum"
 }
 is_eligible_for_discount() {
+    discount=0
     local check;
     check=$(awk "BEGIN {print ($sum > 50 ? 1 : 0)}") #since direct decimal comparisons are not supported by bash
     if [[ $check -eq 1 ]];then
@@ -49,7 +50,7 @@ store_orders() {
         BillNo=001  #For the first order
     fi
     for o in "${orders[@]}"; do
-        line=$(grep -w "$o" "$MENU_FILE")
+        line=$(awk -F '|' -v id="$o" '$1==id' "$MENU_FILE")
         echo "$BillNo|$date|$time|$line" >> "$ORDER_FILE"    # > : overwrites existing content ;  >> : appends at the end
     done
 }
@@ -105,18 +106,7 @@ if [ "${#orders[@]}" -eq 0 ];then #no of valid orders = 0
     exit 0
 fi
 store_orders 
-# Ordered items
-echo "-------------------------"
-echo "Your order : "
-{
-awk 'NR==1 {print }' $MENU_FILE 
-for o in "${orders[@]}"; do
-    awk -F '|' -v id="$o" '$1==id' "$MENU_FILE" #to avoid the clashing of ItemID with Prices
-done
-}| column -t -s '|'
 calculate_cost
 is_eligible_for_discount
-echo "Total amount after discount : $amount"
-echo "*----------------------------------------------------*"
-echo "Thank you for visiting our restaurant! Hope you had a great time"
+bash Receipt.sh generate "$BillNo" "$sum" "$discount" "$amount"
 
