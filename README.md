@@ -40,6 +40,8 @@
 - **Linux/Unix Shell** – Execution environment
 - **Text Files** – Data storage
 - **Git & GitHub** – Version control
+- **GREP** – Searching and filtering through the relevant data
+- **SED** – Text manipulation of stored order records
 
 ### Project Skeleton Structure
 
@@ -69,9 +71,11 @@ Restaurant-Order-Management/
 
 - Linux or a compatible Bash environment
 - Bash
-- AWK
-- bc
-- column
+- `awk`
+- `grep`
+- `sed`
+- `bc`
+- `column`
 - Git (for the cloning step)
 
 
