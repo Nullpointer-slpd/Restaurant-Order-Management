@@ -26,6 +26,13 @@
 - Displays the number of orders and the average spending of a customer.
 - Generates the category wise sales summaries for each item.
 
+
+### Order Editing
+- Allow customers to change the confirmed orders before the final billing section.
+- Allows them to replace previously ordered items with other available menu items.
+- Helps validate the item IDs and ensures that the items belong to the current order.
+
+
 ### Tools and Technologies Used
 
 - **Bash** – Main scripting language
