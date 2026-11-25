@@ -1,6 +1,5 @@
-
-#for generating receipts of the orders. 
 #!/bin/bash
+#for generating receipts of the orders. 
 ORDER_FILE="./Order.txt"
 RECEIPT_DIR="./Receipts"
 generate_receipt() {
