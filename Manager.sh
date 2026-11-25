@@ -18,8 +18,16 @@ hourly_analysis_for_the_given_date_and_hour() {
         }'
 }
 sales_by_category() {
-    awk -F '|' ' NR>1 {category[$7]+=$6} END {for (c in category) 
-            print "Category : ",c " ; Sale : ₹" category[c]}' "$ORDER_FILE"
+    echo "Category wise sales for $input_date"
+    grep "$input_date" "$ORDER_FILE" |
+    awk -F '|' 'NR > 1 {
+        category[$7] += $6
+    }
+    END {
+        for (c in category) {
+            printf "Category : %s ; Sale : ₹%.2f\n", c, category[c]
+        }
+    }' 
 }
 read -p "Enter the date for which you want the analysis for(DD-MM-YYYY format) : " input_date
 echo "Do want the analysis for only a specified HOUR or for a specified INTERVAL?"
